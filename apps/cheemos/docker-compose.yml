@@ -1,0 +1,85 @@
+version: '3.9'
+
+services:
+  # ----- Backend (FastAPI + Neon DB) ----------------------------------------
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: cheemos-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=${NEON_DATABASE_URL:-${DATABASE_URL}}
+      - DEBUG=${DEBUG:-false}
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - cheemos-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ----- Frontend (React + Nginx) -------------------------------------------
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=${VITE_API_URL:-http://localhost:8000}
+    container_name: cheemos-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - cheemos-net
+
+  # ----- Redis (cache + celery) ---------------------------------------------
+  redis:
+    image: redis:7-alpine
+    container_name: cheemos-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - cheemos-net
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ----- Celery Worker (async tasks) ----------------------------------------
+  celery:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: cheemos-celery
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=${NEON_DATABASE_URL:-${DATABASE_URL}}
+    command: celery -A src.celery_app worker --loglevel=info --concurrency=4
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - cheemos-net
+
+networks:
+  cheemos-net:
+    driver: bridge
+
+volumes:
+  redis_data:

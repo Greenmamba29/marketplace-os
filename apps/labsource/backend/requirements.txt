@@ -1,0 +1,54 @@
+# LabSource Backend Dependencies
+# Python 3.12+ Required
+
+# FastAPI & Server
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+python-multipart>=0.0.6
+
+# Pydantic & Validation
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+email-validator>=2.1.0
+
+# Authentication & Security
+python-jose[cryptography]>=3.3.0
+passlib[bcrypt]>=1.7.4
+pyjwt>=2.8.0
+
+# HTTP Clients
+httpx>=0.26.0
+aiohttp>=3.9.0
+
+# Database
+sqlalchemy>=2.0.0
+alembic>=1.13.0
+psycopg2-binary>=2.9.9
+asyncpg>=0.29.0
+
+# Caching & Queues
+redis>=5.0.0
+celery>=5.3.0
+
+# Utilities
+python-dotenv>=1.0.0
+structlog>=24.1.0
+python-dateutil>=2.8.2
+tenacity>=8.2.0
+
+# Monitoring & Logging
+sentry-sdk>=1.39.0
+prometheus-client>=0.19.0
+
+# Payments
+stripe>=7.10.0
+
+# Email
+sendgrid>=6.11.0
+
+# Storage
+boto3>=1.34.0
+
+# Scientific (for data processing)
+numpy>=1.26.0
+pandas>=2.1.0

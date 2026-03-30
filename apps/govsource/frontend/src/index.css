@@ -1,0 +1,270 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --federal-blue: #1D4ED8;
+  --federal-blue-dark: #1E40AF;
+  --federal-blue-light: #3B82F6;
+  --navy-900: #0F172A;
+  --navy-800: #1E293B;
+  --navy-700: #334155;
+  --navy-600: #475569;
+  --gold-500: #F59E0B;
+  --gold-400: #FBBF24;
+  --success: #10B981;
+  --warning: #F59E0B;
+  --error: #EF4444;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--navy-900);
+  color: #f8fafc;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--navy-800);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--navy-600);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--navy-700);
+}
+
+/* Federal styling */
+.federal-border {
+  border: 1px solid rgba(29, 78, 216, 0.3);
+}
+
+.federal-glow {
+  box-shadow: 0 0 20px rgba(29, 78, 216, 0.15);
+}
+
+/* Status badges */
+.badge {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+}
+
+.badge-success {
+  @apply bg-emerald-500/10 text-emerald-400 border border-emerald-500/20;
+}
+
+.badge-warning {
+  @apply bg-amber-500/10 text-amber-400 border border-amber-500/20;
+}
+
+.badge-error {
+  @apply bg-red-500/10 text-red-400 border border-red-500/20;
+}
+
+.badge-info {
+  @apply bg-blue-500/10 text-blue-400 border border-blue-500/20;
+}
+
+/* Set-aside badges */
+.badge-8a {
+  @apply bg-purple-500/10 text-purple-400 border border-purple-500/20;
+}
+
+.badge-hubzone {
+  @apply bg-cyan-500/10 text-cyan-400 border border-cyan-500/20;
+}
+
+.badge-sdvosb {
+  @apply bg-red-500/10 text-red-400 border border-red-500/20;
+}
+
+.badge-wosb {
+  @apply bg-pink-500/10 text-pink-400 border border-pink-500/20;
+}
+
+/* Card styling */
+.card {
+  @apply bg-slate-800/50 border border-slate-700 rounded-lg;
+}
+
+.card-hover {
+  @apply transition-all duration-200 hover:border-blue-500/30 hover:bg-slate-800;
+}
+
+/* Button variants */
+.btn {
+  @apply inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition-all duration-200;
+}
+
+.btn-primary {
+  @apply bg-blue-600 text-white hover:bg-blue-700;
+}
+
+.btn-secondary {
+  @apply bg-slate-700 text-slate-200 hover:bg-slate-600;
+}
+
+.btn-outline {
+  @apply border border-slate-600 text-slate-300 hover:bg-slate-800 hover:border-slate-500;
+}
+
+.btn-ghost {
+  @apply text-slate-400 hover:text-slate-200 hover:bg-slate-800;
+}
+
+/* Form styling */
+.form-input {
+  @apply w-full px-4 py-2.5 bg-slate-800 border border-slate-600 rounded-lg text-slate-200 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors;
+}
+
+.form-label {
+  @apply block text-sm font-medium text-slate-300 mb-1.5;
+}
+
+.form-error {
+  @apply text-sm text-red-400 mt-1;
+}
+
+/* Table styling */
+.table-container {
+  @apply overflow-x-auto rounded-lg border border-slate-700;
+}
+
+.table {
+  @apply w-full text-left text-sm;
+}
+
+.table th {
+  @apply px-4 py-3 bg-slate-800 text-slate-400 font-medium uppercase tracking-wider text-xs;
+}
+
+.table td {
+  @apply px-4 py-3 border-t border-slate-700/50;
+}
+
+.table tr:hover td {
+  @apply bg-slate-800/50;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Step indicator for wizard */
+.step-indicator {
+  @apply flex items-center;
+}
+
+.step {
+  @apply flex items-center;
+}
+
+.step-circle {
+  @apply w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all;
+}
+
+.step-active .step-circle {
+  @apply bg-blue-600 text-white;
+}
+
+.step-completed .step-circle {
+  @apply bg-emerald-500 text-white;
+}
+
+.step-pending .step-circle {
+  @apply bg-slate-700 text-slate-400;
+}
+
+.step-line {
+  @apply w-12 h-0.5 mx-2;
+}
+
+/* Compliance indicator */
+.compliance-check {
+  @apply flex items-center gap-2;
+}
+
+.compliance-check.valid {
+  @apply text-emerald-400;
+}
+
+.compliance-check.invalid {
+  @apply text-red-400;
+}
+
+.compliance-check.pending {
+  @apply text-amber-400;
+}
+
+/* NAICS/PSC code display */
+.code-badge {
+  @apply inline-flex items-center px-2 py-0.5 bg-slate-700 rounded text-xs font-mono text-slate-300;
+}
+
+/* Security clearance badge */
+.clearance-badge {
+  @apply inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-xs font-medium;
+}
+
+.clearance-ts {
+  @apply bg-red-900/30 text-red-400 border border-red-500/30;
+}
+
+.clearance-s {
+  @apply bg-orange-900/30 text-orange-400 border border-orange-500/30;
+}
+
+.clearance-secret {
+  @apply bg-amber-900/30 text-amber-400 border border-amber-500/30;
+}
+
+.clearance-public {
+  @apply bg-slate-700 text-slate-400 border border-slate-600;
+}
+
+/* Focus styles */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-900;
+}
+
+/* Print styles for government documents */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+}

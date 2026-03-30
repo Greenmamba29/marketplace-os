@@ -1,0 +1,54 @@
+# BarrelHub Marketplace - Root Gitignore
+
+# Dependencies
+**/node_modules/
+**/__pycache__/
+**/*.pyc
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+
+# Build outputs
+frontend/dist/
+backend/dist/
+**/*.egg-info/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# IDE
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Testing
+coverage/
+*.lcov
+
+# Temporary files
+.cache/
+.temp/
+*.tmp
+
+# Database
+*.db
+*.sqlite
+
+# Secrets
+secrets/
+*.pem
+*.key

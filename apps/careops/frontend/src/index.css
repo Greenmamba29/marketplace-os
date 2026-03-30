@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #E11D48;
+  --color-surface: #0A0A0B;
+  --color-surface-50: #18181B;
+  --color-surface-100: #27272A;
+  --color-surface-200: #3F3F46;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--color-surface);
+  color: #fff;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Syne', sans-serif;
+}
+
+.glass {
+  background: rgba(24, 24, 27, 0.8);
+  backdrop-filter: blur(12px);
+}
+
+.btn-primary {
+  @apply bg-primary text-white px-6 py-3 rounded-xl font-medium hover:bg-primary-600 transition-colors inline-flex items-center gap-2;
+}
+
+.btn-secondary {
+  @apply bg-surface-100 text-white px-6 py-3 rounded-xl font-medium hover:bg-surface-200 border border-surface-200 transition-colors inline-flex items-center gap-2;
+}

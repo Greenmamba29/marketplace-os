@@ -1,0 +1,68 @@
+{
+  "bases": [
+    {
+      "name": "GrahmOS Mall Directory",
+      "tables": [
+        {
+          "name": "Stores",
+          "fields": [
+            { "name": "Store Name", "type": "singleLineText" },
+            { "name": "Domain", "type": "singleLineText" },
+            { "name": "Netlify URL", "type": "url" },
+            { "name": "Vertical", "type": "singleLineText" },
+            { "name": "Tier", "type": "number", "options": { "precision": 0 } },
+            { "name": "Wing", "type": "singleSelect", "options": { "choices": [{ "name": "Grand Concourse" }, { "name": "Main Hall" }, { "name": "Specialty Arcade" }] } },
+            { "name": "Accent Color", "type": "singleLineText" },
+            { "name": "GMV Y3 ($M)", "type": "number", "options": { "precision": 2 } },
+            { "name": "Revenue Y3 ($M)", "type": "number", "options": { "precision": 2 } },
+            { "name": "Status", "type": "singleSelect", "options": { "choices": [{ "name": "Open" }, { "name": "Coming Soon" }, { "name": "Maintenance" }] } },
+            { "name": "Description", "type": "multilineText" },
+            { "name": "Icon", "type": "singleLineText" }
+          ]
+        },
+        {
+          "name": "Live Activity",
+          "fields": [
+            { "name": "Store ID", "type": "singleLineText" },
+            { "name": "Event Type", "type": "singleSelect", "options": { "choices": [{ "name": "Sale" }, { "name": "RFQ" }, { "name": "Signup" }] } },
+            { "name": "Amount", "type": "currency", "options": { "symbol": "$", "precision": 2 } },
+            { "name": "Timestamp", "type": "dateTime", "options": { "dateFormat": { "format": "YYYY-MM-DD", "name": "iso" }, "timeFormat": { "format": "HH:mm", "name": "24hour" } } },
+            { "name": "Buyer Region", "type": "singleLineText" }
+          ]
+        },
+        {
+          "name": "Performance",
+          "fields": [
+            { "name": "Store ID", "type": "singleLineText" },
+            { "name": "Month", "type": "singleLineText" },
+            { "name": "GMV", "type": "currency", "options": { "symbol": "$", "precision": 0 } },
+            { "name": "Revenue", "type": "currency", "options": { "symbol": "$", "precision": 0 } },
+            { "name": "Active Buyers", "type": "number", "options": { "precision": 0 } },
+            { "name": "RFQs Submitted", "type": "number", "options": { "precision": 0 } },
+            { "name": "Conversion Rate", "type": "percent", "options": { "precision": 2 } }
+          ]
+        }
+      ]
+    },
+    {
+      "template": "Marketplace Base",
+      "tables": [
+        {
+          "name": "Products",
+          "fields": [
+            { "name": "sku", "type": "singleLineText" },
+            { "name": "name", "type": "singleLineText" },
+            { "name": "category", "type": "singleLineText" },
+            { "name": "supplier", "type": "singleLineText" },
+            { "name": "unit_price_usd", "type": "currency", "options": { "symbol": "$", "precision": 2 } },
+            { "name": "moq", "type": "number", "options": { "precision": 0 } },
+            { "name": "lead_time_days", "type": "number", "options": { "precision": 0 } },
+            { "name": "availability", "type": "singleSelect", "options": { "choices": [{ "name": "In Stock" }, { "name": "Out of Stock" }, { "name": "Backorder" }] } },
+            { "name": "certification", "type": "singleLineText" },
+            { "name": "description", "type": "multilineText" }
+          ]
+        }
+      ]
+    }
+  ]
+}

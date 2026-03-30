@@ -1,0 +1,107 @@
+version: '3.8'
+
+services:
+  baserow:
+    image: baserow/baserow:latest
+    container_name: marketplace-os-baserow
+    ports:
+      - "8080:80"
+    environment:
+      - BASEROW_PUBLIC_URL=http://localhost:8080
+    volumes:
+      - baserow_data:/baserow/data
+    networks:
+      - marketplace-os-net
+    restart: always
+
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: marketplace-os-n8n
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - NODE_ENV=production
+    volumes:
+      - n8n_data:/home/node/.n8n
+    networks:
+      - marketplace-os-net
+    restart: always
+
+  redis:
+    image: redis:alpine
+    container_name: marketplace-os-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - marketplace-os-net
+    restart: always
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: marketplace-os-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=marketplace_admin
+      - POSTGRES_PASSWORD=marketplace_password
+      - POSTGRES_DB=marketplace_os_master
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - marketplace-os-net
+    restart: always
+
+  meilisearch:
+    image: getmeili/meilisearch:latest
+    container_name: marketplace-os-meilisearch
+    ports:
+      - "7700:7700"
+    environment:
+      - MEILI_MASTER_KEY=marketplace_search_key
+      - MEILI_ENV=development
+    volumes:
+      - meilisearch_data:/meili_data
+    networks:
+      - marketplace-os-net
+    restart: always
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: marketplace-os-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    networks:
+      - marketplace-os-net
+    restart: always
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: marketplace-os-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=marketplace_grafana
+    volumes:
+      - grafana_data:/var/lib/grafana
+    networks:
+      - marketplace-os-net
+    restart: always
+
+networks:
+  marketplace-os-net:
+    driver: bridge
+
+volumes:
+  baserow_data:
+  n8n_data:
+  postgres_data:
+  meilisearch_data:
+  prometheus_data:
+  grafana_data:

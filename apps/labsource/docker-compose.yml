@@ -1,0 +1,94 @@
+# LabSource Docker Compose Configuration
+# Development environment setup
+
+version: '3.8'
+
+services:
+  # Frontend React Application
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    environment:
+      - VITE_API_URL=http://localhost:8000/api/v1
+    depends_on:
+      - backend
+    networks:
+      - labsource-network
+
+  # Backend FastAPI Application
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=development
+      - DEBUG=true
+      - SECRET_KEY=dev-secret-key-change-in-production
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/labsource
+      - REDIS_URL=redis://redis:6379/0
+      - BASEROW_URL=${BASEROW_URL}
+      - BASEROW_TOKEN=${BASEROW_TOKEN}
+      - SALEOR_URL=${SALEOR_URL}
+      - SALEOR_TOKEN=${SALEOR_TOKEN}
+    depends_on:
+      - db
+      - redis
+    networks:
+      - labsource-network
+    volumes:
+      - ./backend/src:/app/src
+    command: uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
+
+  # PostgreSQL Database
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=labsource
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - labsource-network
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - labsource-network
+
+  # Celery Worker (for background tasks)
+  celery:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      - ENVIRONMENT=development
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/labsource
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - db
+      - redis
+    networks:
+      - labsource-network
+    command: celery -A src.tasks worker --loglevel=info
+    # Note: Celery tasks module needs to be created
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  labsource-network:
+    driver: bridge

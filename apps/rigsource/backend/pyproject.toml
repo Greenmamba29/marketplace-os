@@ -1,0 +1,13 @@
+[project]
+name = "rigsource-backend"
+version = "1.0.0"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "pydantic[email]",
+    "python-jose[cryptography]",
+    "passlib[bcrypt]",
+    "httpx",
+    "python-dotenv",
+    "stripe",
+]

@@ -40,7 +40,17 @@ const MedSupplyLanding: React.FC = () => {
             <a href="#categories" className="hover:text-white transition-colors">Categories</a>
             <a href="#compliance" className="hover:text-white transition-colors">Compliance</a>
           </div>
-          <Link 
+          
+          {/* Back to Mall — always visible in nav */}
+          <a
+            href="https://marketplace-os-hub.netlify.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden md:flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-surface-400 hover:text-white border border-surface-200/50 hover:border-white/20 px-3 py-1.5 rounded-full transition-colors"
+          >
+            ← GrahmOS Mall
+          </a>
+<Link 
             to="/register" 
             className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-xs font-black transition-all shadow-lg shadow-blue-600/20 uppercase tracking-widest"
           >

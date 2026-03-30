@@ -20,7 +20,7 @@ export default function RFQWizard() {
   const handleBack = () => setStep(s => s - 1);
   const handleSubmit = () => {
     toast.success('Enterprise RFQ Created');
-    navigate('/dashboard');
+    navigate('/order-success');
   };
 
   return (

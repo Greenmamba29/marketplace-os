@@ -12,6 +12,7 @@ const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
 const Login = lazy(() => import('./pages/Login'));
 const Register = lazy(() => import('./pages/Register'));
 const Pricing = lazy(() => import('./pages/Pricing'));
+const OrderSuccess = lazy(() => import('./pages/OrderSuccess'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Loading component
@@ -30,6 +31,7 @@ const App: React.FC = () => {
           <Route path="parts" element={<PartsDirectory />} />
           <Route path="parts/:id" element={<PartDetail />} />
           <Route path="rfq/new" element={<RFQWizard />} />
+          <Route path="order-success" element={<OrderSuccess />} />
           <Route path="pricing" element={<Pricing />} />
           <Route path="dashboard" element={<BuyerDashboard />} />
           <Route path="admin" element={<AdminDashboard />} />

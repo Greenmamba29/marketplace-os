@@ -64,7 +64,17 @@ export default function Landing() {
             <a href="#intelligence" className="hover:text-white transition-colors">Intelligence</a>
             <a href="#compliance" className="hover:text-white transition-colors">Compliance</a>
           </div>
-          <Link 
+          
+          {/* Back to Mall — always visible in nav */}
+          <a
+            href="https://marketplace-os-hub.netlify.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden md:flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-surface-400 hover:text-white border border-surface-200/50 hover:border-white/20 px-3 py-1.5 rounded-full transition-colors"
+          >
+            ← GrahmOS Mall
+          </a>
+<Link 
             to="/register" 
             className="px-6 py-2.5 bg-[#7C3AED] hover:bg-violet-600 text-white rounded-full text-xs font-black transition-all shadow-lg shadow-violet-600/20 uppercase tracking-widest"
           >

@@ -22,7 +22,7 @@ export default function RFQWizard() {
   
   const handleSubmit = () => {
     toast.success('RFQ Submitted Successfully!');
-    setTimeout(() => navigate('/dashboard'), 2000);
+    setTimeout(() => navigate('/order-success'), 2000);
   };
 
   return (

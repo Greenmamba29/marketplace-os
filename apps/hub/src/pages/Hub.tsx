@@ -10,6 +10,8 @@ import { MallDirectory } from '../components/MallDirectory';
 import { StorefrontCard } from '../components/StorefrontCard';
 import { LiveTicker } from '../components/LiveTicker';
 import { FastLane } from '../components/FastLane';
+import { WingSelector } from '../components/WingSelector';
+import { ConfidenceLayer } from '../components/ConfidenceLayer';
 
 // Animated counter scoped to viewport entry
 const AnimatedCounter = ({ end, suffix = '', duration = 2 }: { end: number; suffix?: string; duration?: number }) => {
@@ -296,6 +298,12 @@ export const Hub: React.FC = () => {
       <div id="fast-lane">
         <FastLane />
       </div>
+
+      {/* ── WING SELECTOR — aisle map ── */}
+      <WingSelector />
+
+      {/* ── CONFIDENCE LAYER — trust before entry ── */}
+      <ConfidenceLayer />
 
       {/* ── MALL FLOOR ── */}
       <main id="mall-floor" className="relative z-10 pt-24 pb-40 scroll-mt-16">

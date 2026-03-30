@@ -9,7 +9,7 @@ const RFQWizard: React.FC = () => {
 
   const handleSubmit = () => {
     toast.success('Project RFQ Broadcasted!');
-    navigate('/dashboard');
+    navigate('/order-success');
   };
 
   return (

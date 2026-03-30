@@ -11,6 +11,7 @@ const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
 const Login = lazy(() => import('./pages/Login'));
 const Register = lazy(() => import('./pages/Register'));
 const Pricing = lazy(() => import('./pages/Pricing'));
+const OrderSuccess = lazy(() => import('./pages/OrderSuccess'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 const App: React.FC = () => (
@@ -20,7 +21,8 @@ const App: React.FC = () => (
         <Route index element={<Landing />} />
         <Route path="products" element={<ProductDirectory />} />
         <Route path="products/:id" element={<ProductDetail />} />
-        <Route path="rfq/new" element={<RFQWizard />} />
+        <Route path="rfq/new" element={<RFQWizard />
+          <Route path="order-success" element={<OrderSuccess />} />} />
         <Route path="pricing" element={<Pricing />} />
         <Route path="dashboard" element={<BuyerDashboard />} />
         <Route path="admin" element={<AdminDashboard />} />

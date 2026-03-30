@@ -34,7 +34,7 @@ const RFQWizard: React.FC = () => {
                    <select className="w-1/2"><option>Routine</option><option>Urgent</option><option>Emergency</option></select>
                 </div>
              </div>
-             <button onClick={() => { toast.success('RFQ Submitted'); navigate('/dashboard'); }} className="btn btn-primary w-full py-4 font-bold uppercase tracking-widest text-sm">Submit to Verified Vendors</button>
+             <button onClick={() => { toast.success('RFQ Submitted'); navigate('/order-success'); }} className="btn btn-primary w-full py-4 font-bold uppercase tracking-widest text-sm">Submit to Verified Vendors</button>
           </div>
        </div>
     </div>

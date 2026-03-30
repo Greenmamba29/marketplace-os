@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams, useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Package, ClipboardList, Truck, CheckCircle2, ChevronRight, ChevronLeft, Building2, AlertCircle } from 'lucide-react';
+import { Package, ClipboardList, Truck, CheckCircle2, ChevronRight, ChevronLeft, Building2, AlertCircle, ArrowLeft, ExternalLink } from 'lucide-react';
 import { usePart, useRFQ } from '../hooks';
+import { getContinueShoppingUrl, getContinueShoppingLabel } from '../hooks/useShoppingContext';
 import toast from 'react-hot-toast';
+
+const MALL_URL = 'https://marketplace-os-hub.netlify.app';
 
 const STEPS = [
   { id: 1, title: 'Part Info', icon: Package },
@@ -42,14 +45,32 @@ const RFQWizard: React.FC = () => {
     try {
       await submit.mutateAsync(formData);
       toast.success('RFQ Submitted Successfully!');
-      navigate('/dashboard');
+      navigate('/order-success');
     } catch (error) {
       toast.error('Failed to submit RFQ');
     }
   };
 
+  const continueUrl = getContinueShoppingUrl();
+  const continueLabel = getContinueShoppingLabel();
+
   return (
     <div className="py-12 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+      {/* Continue Shopping bar */}
+      <div className="flex items-center justify-between mb-8 flex-wrap gap-3">
+        <Link to="/parts" className="flex items-center gap-2 text-xs text-surface-400 hover:text-primary transition-colors font-bold uppercase tracking-widest">
+          <ArrowLeft className="w-3.5 h-3.5" /> Back to Directory
+        </Link>
+        <a
+          href={continueUrl}
+          target={continueUrl.startsWith('http') ? '_blank' : undefined}
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 text-xs text-surface-400 hover:text-primary transition-colors font-bold uppercase tracking-widest"
+        >
+          <ExternalLink className="w-3.5 h-3.5" />{continueLabel}
+        </a>
+      </div>
+
       {/* Step Indicator */}
       <div className="mb-12">
         <div className="flex justify-between relative">
